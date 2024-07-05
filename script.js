@@ -1,7 +1,6 @@
 const results = [];
 const tournaments = {};
 const athletes = [];
-const adminPassword = 'securepassword'; // Das Passwort für den Admin-Bereich
 
 function showAddTournamentForm() {
     document.getElementById('addTournamentForm').style.display = 'block';
@@ -206,35 +205,6 @@ function loadData() {
     displayResults();
 }
 
-function adminLogin() {
-    const password = document.getElementById('adminPassword').value;
-    
-    if (password === adminPassword) {
-        localStorage.setItem('isAdmin', 'true');
-        window.location.href = 'admin.html';
-    } else {
-        alert("Falsches Passwort");
-    }
-}
-
-function logout() {
-    localStorage.removeItem('isAdmin');
-    window.location.href = 'index.html';
-}
-
-function checkAdminAccess() {
-    const isAdmin = localStorage.getItem('isAdmin');
-    const adminLink = document.getElementById('adminLink');
-    const logoutLink = document.getElementById('logoutLink');
-    
-    if (isAdmin) {
-        adminLink.style.display = 'block';
-        logoutLink.style.display = 'block';
-    } else {
-        window.location.href = 'login.html';
-    }
-}
-
 function toggleMenu() {
     const menu = document.getElementById('menu');
     if (menu.style.display === 'flex') {
@@ -335,14 +305,5 @@ function closeNotification() {
 }
 
 window.onload = function() {
-    const isAdmin = localStorage.getItem('isAdmin');
-    const adminLink = document.getElementById('adminLink');
-    const logoutLink = document.getElementById('logoutLink');
-    
-    if (isAdmin) {
-        adminLink.style.display = 'block';
-        logoutLink.style.display = 'block';
-    }
-    
     loadData();
 };
