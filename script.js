@@ -289,7 +289,38 @@ function importDataFromExcel(event) {
 function importData() {
     const fileInput = document.getElementById('fileInput');
     if (fileInput.files.length > 0) {
-        importDataFromExcel({ target: fileInput });
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+
+        progressContainer.style.display = 'block';
+        progressBar.style.width = '0%';
+        progressText.innerText = '0%';
+
+        const reader = new FileReader();
+        reader.onprogress = (e) => {
+            if (e.lengthComputable) {
+                const percentLoaded = Math.round((e.loaded / e.total) * 100);
+                progressBar.style.width = percentLoaded + '%';
+                progressText.innerText = percentLoaded + '%';
+            }
+        };
+
+        reader.onload = (e) => {
+            importDataFromExcel({ target: { files: [fileInput.files[0]] } });
+            progressBar.style.width = '100%';
+            progressText.innerText = '100%';
+            setTimeout(() => {
+                progressContainer.style.display = 'none';
+            }, 500);
+        };
+
+        reader.onerror = () => {
+            progressBar.style.width = '0%';
+            progressText.innerText = 'Fehler beim Hochladen';
+        };
+
+        reader.readAsArrayBuffer(fileInput.files[0]);
     }
 }
 
