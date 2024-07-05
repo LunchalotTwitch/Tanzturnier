@@ -23,6 +23,11 @@
         <button class="btn" onclick="document.getElementById('fileInput').click()">Excel-Datei auswählen</button>
         <button class="btn btn-upload" id="uploadButton" style="display: none;" onclick="importData()">Jetzt hochladen</button>
         <button class="btn btn-export" onclick="exportDataToPDF()">Daten als PDF exportieren</button>
+
+        <div id="progressContainer" class="progress-container" style="display: none;">
+            <div id="progressBar" class="progress-bar"></div>
+            <div id="progressText" class="progress-text">0%</div>
+        </div>
         
         <div id="importNotification" class="notification" style="display: none;">
             Import durchgeführt. <span class="close" onclick="closeNotification()">X</span>
