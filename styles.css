@@ -159,3 +159,30 @@ th {
 .notification .close:hover {
     color: black;
 }
+
+/* Progress Bar */
+.progress-container {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+    position: relative;
+    text-align: center;
+    height: 30px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 5px;
+}
+
+.progress-text {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    color: black;
+    line-height: 30px;
+}
