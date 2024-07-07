@@ -17,13 +17,13 @@ h1, h2 {
 
 form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 10px;
 }
 
 .form-group {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 }
 
 label {
@@ -41,13 +41,11 @@ input[type="text"], select {
     gap: 5px;
 }
 
-#scores input {
-    width: calc(33% - 10px);
-    margin-bottom: 10px;
+#scores input, #scores label {
+    width: calc(50% - 10px);
 }
 
 button {
-    grid-column: span 2;
     padding: 10px;
     background-color: #007BFF;
     color: #fff;
@@ -81,7 +79,7 @@ th {
 }
 
 @media (max-width: 600px) {
-    #scores input {
-        width: calc(50% - 10px);
+    #scores input, #scores label {
+        width: 100%;
     }
 }
