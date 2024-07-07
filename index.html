@@ -19,37 +19,51 @@
             <div class="form-group">
                 <div>
                     <label for="ageGroup">Altersklasse:</label>
-                    <input type="text" id="ageGroup" name="ageGroup">
+                    <input type="text" id="ageGroup" name="ageGroup" readonly>
                 </div>
                 <div>
                     <label for="discipline">Disziplin:</label>
-                    <input type="text" id="discipline" name="discipline">
+                    <input type="text" id="discipline" name="discipline" readonly>
                 </div>
             </div>
 
             <label for="startNumber">Startnummer:</label>
-            <input type="text" id="startNumber" name="startNumber">
+            <select id="startNumber" name="startNumber" onchange="updateStarterInfo()">
+                <option value="">Wählen...</option>
+                <!-- Optionen werden dynamisch eingefügt -->
+            </select>
+
+            <div class="form-group">
+                <div>
+                    <label for="club">Verein:</label>
+                    <input type="text" id="club" name="club" readonly>
+                </div>
+                <div>
+                    <label for="starterName">Name des Starters:</label>
+                    <input type="text" id="starterName" name="starterName" readonly>
+                </div>
+            </div>
 
             <div id="scores">
-                <label for="score1">Wertung Richter 1:</label>
+                <label for="score1">Wertung Richter 1 (WR 1):</label>
                 <input type="number" name="score" min="10" max="100" step="10" onkeydown="return nextInput(event)">
                 
-                <label for="score2">Wertung Richter 2:</label>
+                <label for="score2">Wertung Richter 2 (WR 2):</label>
                 <input type="number" name="score" min="10" max="100" step="10" onkeydown="return nextInput(event)">
                 
-                <label for="score3">Wertung Richter 3:</label>
+                <label for="score3">Wertung Richter 3 (WR 3):</label>
                 <input type="number" name="score" min="10" max="100" step="10" onkeydown="return nextInput(event)">
                 
-                <label for="score4">Wertung Richter 4:</label>
+                <label for="score4">Wertung Richter 4 (WR 4):</label>
                 <input type="number" name="score" min="10" max="100" step="10" onkeydown="return nextInput(event)">
                 
-                <label for="score5">Wertung Richter 5:</label>
+                <label for="score5">Wertung Richter 5 (WR 5):</label>
                 <input type="number" name="score" min="10" max="100" step="10" onkeydown="return nextInput(event)">
                 
-                <label for="score6">Wertung Richter 6:</label>
+                <label for="score6">Wertung Richter 6 (WR 6):</label>
                 <input type="number" name="score" min="10" max="100" step="10" onkeydown="return nextInput(event)">
                 
-                <label for="score7">Wertung Richter 7:</label>
+                <label for="score7">Wertung Richter 7 (WR 7):</label>
                 <input type="number" name="score" min="10" max="100" step="10" onkeydown="return nextInput(event)">
             </div>
             
