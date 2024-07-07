@@ -11,14 +11,37 @@ async function fetchStartersData() {
         // Add more data as needed
     };
 
-    // Populate start numbers in the dropdown
+    // Populate start numbers, age groups, and disciplines in the dropdowns
     const startNumberSelect = document.getElementById('startNumber');
+    const ageGroupSelect = document.getElementById('ageGroup');
+    const disciplineSelect = document.getElementById('discipline');
+    
+    const ageGroups = new Set();
+    const disciplines = new Set();
+
     for (const startNumber in startersData) {
         const option = document.createElement('option');
         option.value = startNumber;
         option.text = startNumber;
         startNumberSelect.appendChild(option);
+
+        ageGroups.add(startersData[startNumber].ageGroup);
+        disciplines.add(startersData[startNumber].discipline);
     }
+
+    ageGroups.forEach(ageGroup => {
+        const option = document.createElement('option');
+        option.value = ageGroup;
+        option.text = ageGroup;
+        ageGroupSelect.appendChild(option);
+    });
+
+    disciplines.forEach(discipline => {
+        const option = document.createElement('option');
+        option.value = discipline;
+        option.text = discipline;
+        disciplineSelect.appendChild(option);
+    });
 }
 
 function updateStarterInfo() {
@@ -116,6 +139,11 @@ function nextInput(event) {
         }
         event.preventDefault();
     }
+}
+
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
 // Fetch starters data on page load
