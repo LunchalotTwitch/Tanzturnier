@@ -1,15 +1,30 @@
 let entries = [];
+let startersData = {}; // Object to store starters data
+
+// Function to fetch starters data from another page or API
+async function fetchStartersData() {
+    // Simulate fetching data from an external source
+    startersData = {
+        "1": { club: "Verein A", name: "Starter A" },
+        "2": { club: "Verein B", name: "Starter B" },
+        "3": { club: "Verein C", name: "Starter C" }
+        // Add more data as needed
+    };
+}
 
 function saveEntry() {
     const form = document.getElementById('entryForm');
     const formData = new FormData(form);
+    const startNumber = formData.get('startNumber');
+    const starterInfo = startersData[startNumber] || { club: "", name: "" };
+
     const entry = {
         tournament: formData.get('tournament'),
         ageGroup: formData.get('ageGroup'),
         discipline: formData.get('discipline'),
-        startNumber: formData.get('startNumber'),
-        club: formData.get('club'),
-        starterName: formData.get('starterName'),
+        startNumber: startNumber,
+        club: starterInfo.club,
+        starterName: starterInfo.name,
         scores: []
     };
 
@@ -27,6 +42,9 @@ function saveEntry() {
 
     entries.push(entry);
     updateResultsTable();
+
+    // Retain tournament, ageGroup, and discipline; increment startNumber
+    form.querySelector('#startNumber').value = parseInt(startNumber) + 1;
 }
 
 function updateResultsTable() {
@@ -66,3 +84,6 @@ function nextInput(event) {
         event.preventDefault();
     }
 }
+
+// Fetch starters data on page load
+window.onload = fetchStarters
