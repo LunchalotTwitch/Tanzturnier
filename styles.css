@@ -26,23 +26,24 @@ form {
     justify-content: space-between;
 }
 
+.form-group.scores {
+    flex-direction: row;
+}
+
 label {
     font-size: 0.9em;
 }
 
-input[type="text"], select {
+input[type="text"], select, input[type="number"] {
     padding: 5px;
     font-size: 0.9em;
+    width: 100%;
 }
 
 #scores {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-}
-
-#scores input, #scores label {
-    width: calc(50% - 10px);
 }
 
 button {
@@ -79,7 +80,7 @@ th {
 }
 
 @media (max-width: 600px) {
-    #scores input, #scores label {
-        width: 100%;
+    .form-group.scores {
+        flex-direction: column;
     }
 }

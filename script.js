@@ -5,11 +5,30 @@ let startersData = {}; // Object to store starters data
 async function fetchStartersData() {
     // Simulate fetching data from an external source
     startersData = {
-        "1": { club: "Verein A", name: "Starter A" },
-        "2": { club: "Verein B", name: "Starter B" },
-        "3": { club: "Verein C", name: "Starter C" }
+        "1": { ageGroup: "U14", discipline: "Lauf", club: "Verein A", name: "Starter A" },
+        "2": { ageGroup: "U16", discipline: "Sprung", club: "Verein B", name: "Starter B" },
+        "3": { ageGroup: "U18", discipline: "Wurf", club: "Verein C", name: "Starter C" }
         // Add more data as needed
     };
+
+    // Populate start numbers in the dropdown
+    const startNumberSelect = document.getElementById('startNumber');
+    for (const startNumber in startersData) {
+        const option = document.createElement('option');
+        option.value = startNumber;
+        option.text = startNumber;
+        startNumberSelect.appendChild(option);
+    }
+}
+
+function updateStarterInfo() {
+    const startNumber = document.getElementById('startNumber').value;
+    const starterInfo = startersData[startNumber] || { ageGroup: "", discipline: "", club: "", name: "" };
+
+    document.getElementById('ageGroup').value = starterInfo.ageGroup;
+    document.getElementById('discipline').value = starterInfo.discipline;
+    document.getElementById('club').value = starterInfo.club;
+    document.getElementById('starterName').value = starterInfo.name;
 }
 
 function saveEntry() {
@@ -44,16 +63,30 @@ function saveEntry() {
     updateResultsTable();
 
     // Retain tournament, ageGroup, and discipline; increment startNumber
-    form.querySelector('#startNumber').value = parseInt(startNumber) + 1;
+    const nextStartNumber = parseInt(startNumber) + 1;
+    if (startersData[nextStartNumber]) {
+        document.getElementById('startNumber').value = nextStartNumber;
+        updateStarterInfo();
+    }
 }
 
 function updateResultsTable() {
+    const filterTournament = document.getElementById('filterTournament').value;
+    const filterAgeGroup = document.getElementById('filterAgeGroup').value;
+    const filterDiscipline = document.getElementById('filterDiscipline').value;
+
     const tableBody = document.querySelector('#resultsTable tbody');
     tableBody.innerHTML = '';
 
-    entries.sort((a, b) => b.pointScore - a.pointScore);
+    const filteredEntries = entries.filter(entry => {
+        return (!filterTournament || entry.tournament === filterTournament) &&
+               (!filterAgeGroup || entry.ageGroup.includes(filterAgeGroup)) &&
+               (!filterDiscipline || entry.discipline.includes(filterDiscipline));
+    });
 
-    entries.forEach((entry, index) => {
+    filteredEntries.sort((a, b) => b.pointScore - a.pointScore);
+
+    filteredEntries.forEach((entry, index) => {
         const row = document.createElement('tr');
         
         row.innerHTML = `
@@ -86,4 +119,4 @@ function nextInput(event) {
 }
 
 // Fetch starters data on page load
-window.onload = fetchStarters
+window.onload = fetchStartersData;
