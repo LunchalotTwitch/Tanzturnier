@@ -55,3 +55,14 @@ function updateResultsTable() {
         tableBody.appendChild(row);
     });
 }
+
+function nextInput(event) {
+    if (event.key === "Enter") {
+        const formElements = Array.from(event.target.form.elements);
+        const index = formElements.indexOf(event.target);
+        if (index > -1 && index < formElements.length - 1) {
+            formElements[index + 1].focus();
+        }
+        event.preventDefault();
+    }
+}
